@@ -708,5 +708,4 @@ with tabs[7]:
             st.warning("Есть листы, которые приложение не смогло автоматически отнести к разделу.")
             for source, df in other_parts:
                 with st.expander(source):
-                    st.write("Колонки:", list(map(str,df.columns)))
-                    st.dataframe(df.head(20),use_container_width=True)
+                    st.write("Колонки:", list(map(str,df.columns)
