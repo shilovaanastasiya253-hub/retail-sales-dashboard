@@ -17,12 +17,21 @@ st.markdown("""
 <style>
 .block-container {padding-top: 1.2rem; padding-bottom: 2rem; max-width: 1600px;}
 [data-testid="stMetric"] {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: var(--secondary-background-color);
+    border: 1px solid rgba(128,128,128,.28);
     padding: 14px 16px;
     border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
 }
-[data-testid="stSidebar"] {background: #f7f9fc;}
+[data-testid="stMetricLabel"],
+[data-testid="stMetricValue"],
+[data-testid="stMetricDelta"] {
+    color: var(--text-color) !important;
+}
+[data-testid="stSidebar"] {
+    background: var(--secondary-background-color);
+    color: var(--text-color);
+}
 div[data-baseweb="tab-list"] {gap: 8px;}
 div[data-baseweb="tab"] {
     border-radius: 10px 10px 0 0;
@@ -708,4 +717,5 @@ with tabs[7]:
             st.warning("Есть листы, которые приложение не смогло автоматически отнести к разделу.")
             for source, df in other_parts:
                 with st.expander(source):
-                    st.write("Колонки:", list(map(str,df.columns)
+                    st.write("Колонки:", list(map(str,df.columns)))
+                    st.dataframe(df.head(20),use_container_width=True)
