@@ -653,7 +653,10 @@ with tabs[5]:
             rows.append([name,p,f,f-p if pd.notna(p) and pd.notna(f) else np.nan,perf])
 
         t = pd.DataFrame(rows, columns=["Показатель","План","Факт","Отклонение Ф–П","Выполнение"])
-        show = t.copy()
+        # Форматируем отображение в отдельной object-таблице.
+        # Это совместимо с новыми версиями pandas, которые запрещают
+        # записывать строки вроде "398 140 ₽" прямо в float-колонки.
+        show = t.astype(object).copy()
         money_rows = {"Выручка","МЗ, ₽","Средний чек МЗ","ЛО, ₽"}
         for idx, row in show.iterrows():
             if row["Показатель"] in money_rows:
